@@ -66,7 +66,7 @@ if uploaded_file:
 
                 # Main area
                 st.subheader("Filtered Transactions")
-                st.dataframe(filtered_df, use_container_width=True)
+                st.dataframe(filtered_df, width='stretch')
 
                 # Download button
                 csv = filtered_df.to_csv(index=False).encode('utf-8')
@@ -110,7 +110,7 @@ if uploaded_file:
                 breakdown = filtered_df.groupby('category')['amount'].agg(['sum', 'count']).sort_values('sum', ascending=False)
                 breakdown.columns = ['Total Spent', 'Transactions']
                 breakdown['Total Spent'] = breakdown['Total Spent'].apply(lambda x: f"${x:,.2f}")
-                st.dataframe(breakdown, use_container_width=True)
+                st.dataframe(breakdown, width='stretch')
 
     except Exception as e:
         st.error(f"Error reading file: {e}")
