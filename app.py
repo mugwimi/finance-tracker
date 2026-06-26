@@ -21,20 +21,16 @@ if uploaded_file:
     try:
         df = pd.read_csv(uploaded_file)
         
-        # Validate required columns
         required_cols = ['date', 'category', 'amount']
         if not all(col in df.columns for col in required_cols):
             st.error(f"CSV must contain columns: {', '.join(required_cols)}")
         else:
-            # Convert date column
             df['date'] = pd.to_datetime(df['date'])
             df = df.sort_values('date')
             
-            # Show data
             st.subheader("Your Transactions")
             st.dataframe(df, use_container_width=True)
             
-            # Metrics row
             col1, col2, col3 = st.columns(3)
             total = df['amount'].sum()
             avg_transaction = df['amount'].mean()
@@ -44,7 +40,6 @@ if uploaded_file:
             col2.metric("Avg Transaction", f"${avg_transaction:,.2f}")
             col3.metric("Transactions", num_transactions)
             
-            # Charts
             col1, col2 = st.columns(2)
             
             with col1:
@@ -64,5 +59,6 @@ if uploaded_file:
         st.error(f"Error reading file: {e}")
 else:
     st.info("👆 Upload a CSV file to get started")
-    st.markdown("""
-    **Sample CSV format:**
+    st.markdown(
+        """
+        **Sample CSV format:**
