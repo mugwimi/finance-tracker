@@ -59,6 +59,5 @@ if uploaded_file:
         st.error(f"Error reading file: {e}")
 else:
     st.info("👆 Upload a CSV file to get started")
-    st.markdown(
-        """
-        **Sample CSV format:**
+    st.markdown("**Sample CSV format:**")
+    st.code("date,category,amount\n2024-01-15,Groceries,54.20\n2024-01-16,Transport,15.50\n2024-01-17,Entertainment,25.00", language="csv")
